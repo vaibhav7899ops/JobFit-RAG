@@ -6,3 +6,4 @@ venv/
 chroma_data/
 .claude/
 .pytest_cache/
+.vercel
