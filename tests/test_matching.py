@@ -76,6 +76,24 @@ def test_no_jobs_raises_value_error(db):
         matching_service.get_matches_for_user(db, user)
 
 
+def test_empty_candidate_jobs_raises_value_error(db, mocker):
+    """Regression test: Chroma returning zero candidates (e.g. jobs exist in Postgres but
+    haven't been embedded yet) must not silently send an empty job list to the LLM."""
+    now = datetime.now(timezone.utc)
+    user = _make_user(db)
+    _make_resume(db, user.id, uploaded_at=now)
+    _make_job(db, "ext-1", fetched_at=now)
+
+    mocker.patch.object(matching_service, "embed_text", return_value=[0.1, 0.2, 0.3])
+    mocker.patch.object(matching_service.jobs_collection, "query", return_value={"ids": [[]]})
+    mock_analyze = mocker.patch.object(matching_service, "analyze_resume_against_jobs")
+
+    with pytest.raises(ValueError, match="No matching jobs found"):
+        matching_service.get_matches_for_user(db, user)
+
+    mock_analyze.assert_not_called()
+
+
 def test_recomputes_when_no_existing_matches(db, mocker):
     now = datetime.now(timezone.utc)
     user = _make_user(db)

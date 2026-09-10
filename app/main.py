@@ -3,6 +3,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
+from app.api.admin import router as admin_router
 from app.api.auth import router as auth_router
 from app.api.jobs import router as jobs_router
 from app.api.matches import router as matches_router
@@ -26,6 +27,7 @@ app.include_router(users_router)
 app.include_router(resumes_router)
 app.include_router(jobs_router)
 app.include_router(matches_router)
+app.include_router(admin_router)
 
 
 @app.get("/health")

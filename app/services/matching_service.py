@@ -37,6 +37,9 @@ def _retrieve_candidate_jobs(db: Session, resume_text: str) -> list[dict]:
 
 def _recompute_matches(db: Session, user: User, resume_text: str) -> list[Match]:
     candidate_jobs = _retrieve_candidate_jobs(db, resume_text)
+    if not candidate_jobs:
+        raise ValueError("No matching jobs found yet — try again once more jobs have synced")
+
     batch_response = analyze_resume_against_jobs(resume_text, candidate_jobs)
 
     batch_timestamp = datetime.now(timezone.utc)
