@@ -73,7 +73,7 @@ export default function UploadPage() {
             onChange={handleFileChange}
             className="text-sm file:mr-4 file:rounded-md file:border-0 file:bg-gray-900 file:text-white file:px-3 file:py-2 file:text-sm file:cursor-pointer"
           />
-          <p className="text-xs text-gray-500">PDF or DOCX, up to 5MB.</p>
+          <p className="text-xs text-gray-500">PDF or DOCX, up to 4MB.</p>
           {error && <p className="text-sm text-red-600">{error}</p>}
           {successMessage && <p className="text-sm text-green-700">{successMessage}</p>}
           <button

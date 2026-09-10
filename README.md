@@ -98,7 +98,7 @@ most "free" PaaS tiers offer neither.
 | POST   | `/auth/signup`   | -    | Create an account, returns a JWT          |
 | POST   | `/auth/login`    | -    | Log in (OAuth2 form body), returns a JWT  |
 | GET    | `/users/me`      | ✓    | Current user's profile                    |
-| POST   | `/resumes/upload`| ✓    | Upload a PDF/DOCX resume (max 5MB)        |
+| POST   | `/resumes/upload`| ✓    | Upload a PDF/DOCX resume (max 4MB)        |
 | GET    | `/resumes`       | ✓    | Current user's resume upload history      |
 | GET    | `/jobs`          | -    | Paginated list of synced jobs             |
 | GET    | `/jobs/{id}`     | -    | A single job                              |

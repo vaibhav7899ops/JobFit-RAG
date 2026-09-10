@@ -8,7 +8,7 @@ from sqlalchemy.orm import Session
 from app.models.resume import Resume
 from app.schemas.resume import ResumeCreate
 
-MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024
+MAX_FILE_SIZE_BYTES = 4 * 1024 * 1024
 
 ALLOWED_CONTENT_TYPES = {
     "application/pdf",
@@ -50,7 +50,7 @@ async def extract_text_from_upload(file: UploadFile) -> str:
     if len(file_bytes) > MAX_FILE_SIZE_BYTES:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="File exceeds maximum size of 5MB",
+            detail="File exceeds maximum size of 4MB",
         )
 
     if not _has_valid_signature(file_bytes, extension):
